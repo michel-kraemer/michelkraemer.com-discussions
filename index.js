@@ -134,7 +134,6 @@ console.log(`Fetched ${discussion.comments.nodes.length} comments.`)
 let destFileName = discussion.id
 let destFilePath = path.join("discussions", destFileName)
 console.log(`Writing to ${destFilePath} ...`)
-await fs.mkdir("discussions")
 await fs.writeFile(destFilePath, JSON.stringify(discussion))
 
 console.log("Done.")
