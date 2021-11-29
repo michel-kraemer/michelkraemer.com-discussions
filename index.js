@@ -130,8 +130,7 @@ console.log(`Fetching discussion ${DISCUSSION_NUMBER} ...`)
 let discussion = await fetchComments()
 console.log(`Fetched ${discussion.comments.nodes.length} comments.`)
 
-// TODO get filename from discussion.title or extract it from discussion.body
-let destFileName = discussion.id
+let destFileName = `${discussion.title}.json`
 let destFilePath = path.join("discussions", destFileName)
 console.log(`Writing to ${destFilePath} ...`)
 await fs.writeFile(destFilePath, JSON.stringify(discussion))
