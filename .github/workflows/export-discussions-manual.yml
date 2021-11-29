@@ -27,3 +27,25 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCUSSION_NUMBER: ${{ github.event.inputs.number }}
+
+      - name: Prepare deployment
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/github
+          cat >>~/.ssh/config <<EOL
+          Host github.com
+            HostName github.com
+            IdentityFile ~/.ssh/github
+            User git
+          EOL
+          chmod 700 ~/.ssh
+          chmod -R 600 ~/.ssh/*
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+
+      - run: |
+          git add discussions
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git commit -q -m "export: ${{ github.event.inputs.number }}"
+          git push origin master
