@@ -1,0 +1,29 @@
+name: Export discussions
+
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: Discussion number
+        required: true
+
+concurrency:
+  group: ${{ github.event.inputs.number }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - run: npm ci
+      - run: node index.js
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCUSSION_NUMBER: ${{ github.event.inputs.number }}
