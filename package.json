@@ -1,0 +1,24 @@
+{
+  "name": "michelkraemer.com-discussions",
+  "version": "1.0.0",
+  "description": "Generate static data files from GitHub discussions for michel-kraemer.com",
+  "main": "index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michel-kraemer/michelkraemer.com-discussions.git"
+  },
+  "author": "Michel Kraemer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michel-kraemer/michelkraemer.com-discussions/issues"
+  },
+  "homepage": "https://github.com/michel-kraemer/michelkraemer.com-discussions#readme",
+  "dependencies": {
+    "@octokit/graphql": "^4.8.0"
+  }
+}
